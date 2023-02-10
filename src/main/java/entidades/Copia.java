@@ -1,4 +1,4 @@
-	package entidades;
+package entidades;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,37 +10,33 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Copia {
-	/*public static final boolean DETERIORADO = true;
-	public static final boolean COMO_NUEVO = false;*/
-
+	
 	@Id
 	@GeneratedValue
 	private int id_copia;
-	/*private boolean deteriorado;*/
 	private String editorial;
+	private int anio_publicacion;
 
-	@ManyToOne(cascade = CascadeType.ALL,optional = true)
-	@JoinColumn(foreignKey = @ForeignKey(name ="FK_DNI"))
+	@ManyToOne(cascade = CascadeType.ALL, optional = true)
+	@JoinColumn(foreignKey = @ForeignKey(name = "FK_DNI"))
 	private Persona prestatario;
 
-	// Constructores
-	/*public Copia() {
-		deteriorado = COMO_NUEVO;
-	}*/
+	public Copia() {
 
-	public Copia(/*boolean deteriorado,*/ String editorial) {
-//		this.deteriorado = deteriorado;
-		this.editorial = editorial;
 	}
 
-	// Getters y Setters
-//	public boolean getDeteriorado() {
-//		return deteriorado;
-//	}
+	public Copia(String editorial, int anio_publicacion) {
+		this.editorial = editorial;
+		this.anio_publicacion = anio_publicacion;
+	}
 
-//	public void setDeteriorado(boolean deteriorado) {
-//		this.deteriorado = deteriorado;
-//	}
+	public int getAnio_publicacion() {
+		return anio_publicacion;
+	}
+
+	public void setAnio_publicacion(int anio_publicacion) {
+		this.anio_publicacion = anio_publicacion;
+	}
 
 	public int getId_copia() {
 		return id_copia;
@@ -72,23 +68,22 @@ public class Copia {
 		this.prestatario.getLibros().remove(this);
 		prestatario = null;
 	}
-	
-	public Copia_Digital anidadirCopiaDigital(String fich, String form){
-		Copia_Digital nuevaCopia = new Copia_Digital(fich, form);
+
+	public Copia_Digital anidadirCopiaDigital(String fich, String form, int tamanio) {
+		Copia_Digital nuevaCopia = new Copia_Digital(fich, form, tamanio);
 		nuevaCopia.setOriginal(this);
 		return nuevaCopia;
 	}
 
-	// toString y equals
-//	@Override
-//	public String toString() {
-//		String s = String.format("Copia [%d]%s", id_copia, deteriorado ? " deteriorado" : " como nuevo");
-//		s = s + (prestatario != null?
-//				" / prestado a "+prestatario.getApellidos()+" "+prestatario.getNombre() +
-//				" [" + prestatario.getDni() + "]"
-//				: "");
-//		return s;
-//	}
+	@Override
+	public String toString() {
+		String s = String.format("Copia [%d]", id_copia);
+		s = s + (prestatario != null?
+				" / prestado a "+prestatario.getApellidos()+" "+prestatario.getNombre() +
+				" [" + prestatario.getDni() + "]"
+				: "");
+		return s;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

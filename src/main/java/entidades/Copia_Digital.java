@@ -1,14 +1,19 @@
 package entidades;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Copia_Digital {
 	@Id
+	@GeneratedValue
+	private int id;
 	private String nombre_fichero;
 	private String formato;
+	private int tamanio;
+	
 	
 	@OneToOne
 	private Copia original;
@@ -18,14 +23,24 @@ public class Copia_Digital {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Copia_Digital(String fichero) {
+	public Copia_Digital(String fichero, int tamanio) {
 		nombre_fichero = fichero;
 		formato = "";
+		this.tamanio = tamanio;
 	}
 	
-	public Copia_Digital(String fichero, String formato) {
+	public Copia_Digital(String fichero, String formato, int tamanio) {
 		nombre_fichero = fichero;
 		this.formato = formato;
+		this.tamanio = tamanio;
+	}
+
+	public int getTamanio() {
+		return tamanio;
+	}
+
+	public void setTamanio(int tamanio) {
+		this.tamanio = tamanio;
 	}
 
 	// Getters y Setters

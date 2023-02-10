@@ -14,13 +14,14 @@
 		<class>entidades.Copia</class>
 		<class>entidades.Libro</class>
 		<class>entidades.Copia_Digital</class>
+		<class>entidades.Copia_fisica</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/la_biblioteca" />
-			<property name="javax.persistence.jdbc.user" value="alumno" />
+			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password"
-				value="u@PL5x]OT4I7/k*e" />
+				value="" />
 
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />

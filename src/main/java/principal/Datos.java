@@ -20,20 +20,22 @@ public class Datos {
 		em.createQuery("DELETE FROM Copia").executeUpdate();
 		em.createQuery("DELETE FROM Copia_Digital").executeUpdate();
 		em.createQuery("DELETE FROM Persona").executeUpdate();
+		em.createQuery("DELETE FROM Copia_fisica").executeUpdate();
+
 
 		Autor autor2 = new Autor("Fernando");
 		Autor autor3 = new Autor("Ramón");
 		Autor autor4 = new Autor("Cajal");
-		Libro lazarillo = new Libro("000000", "Popular", "La Vida de Lazarillo de Tormes", 1554);
-		Libro cerebro = new Libro("222222", "Científica", "Estudio del cerebro humano", 1890,
+		Libro lazarillo = new Libro("000000", "La Vida de Lazarillo de Tormes", 1554);
+		Libro cerebro = new Libro("222222", "Estudio del cerebro humano", 1890,
 				Arrays.asList(autor3, autor4));
-		Libro programacion = new Libro("999999", "IES Domingo Perez Minik", "Introducción a la Programación", 2020,
+		Libro programacion = new Libro("999999", "Introducción a la Programación", 2020,
 				autor2);
 
-		lazarillo.addCopia(DETERIORADO);
-		programacion.addCopia(DETERIORADO);
-		cerebro.addCopia(COMO_NUEVO);
-		cerebro.addCopia(DETERIORADO);
+		lazarillo.addCopia("A", 1032);
+		programacion.addCopia("B", 3435);
+		cerebro.addCopia("C", 6574);
+		cerebro.addCopia("D", 4545);
 
 		Persona p1 = new Persona("54063242V", "Esteban", "Plaza Mayor", "C/ Turuta, 10", "+34 44488341",
 				"esteban.coesta.ocupado@gmail.com");

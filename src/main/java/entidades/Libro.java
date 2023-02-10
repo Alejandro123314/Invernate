@@ -18,7 +18,7 @@ public class Libro {
 
 	@Id
 	private String isbn;
-	private String /*editorial,*/ titulo;
+	private String titulo;
 	private int anio_escritura;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -33,9 +33,8 @@ public class Libro {
 	public Libro() {
 	}
 
-	public Libro(String ISBN, /*String editorial,*/ String Titulo, int Año_escritura, List<Autor> autores) {
+	public Libro(String ISBN, String Titulo, int Año_escritura, List<Autor> autores) {
 		this.isbn = ISBN;
-//		this.editorial = editorial;
 		this.titulo = Titulo;
 		this.anio_escritura = Año_escritura;
 		for (Autor autor : autores) {
@@ -44,12 +43,12 @@ public class Libro {
 		copias.add(new Copia());
 	}
 
-	public Libro(String ISBN, /*String editorial,*/ String Titulo, int Año_escritura, Autor autor) {
-		this(ISBN, /*editorial,*/ Titulo, Año_escritura, Arrays.asList(autor));
+	public Libro(String ISBN, String Titulo, int Año_escritura, Autor autor) {
+		this(ISBN,Titulo, Año_escritura, Arrays.asList(autor));
 	}
 
-	public Libro(String ISBN, String editorial, String Titulo, int Año_escritura) {
-		this(ISBN, /*editorial,*/ Titulo, Año_escritura, new ArrayList<Autor>());
+	public Libro(String ISBN, String Titulo, int Año_escritura) {
+		this(ISBN, Titulo, Año_escritura, new ArrayList<Autor>());
 	}
 
 	// Getters y Setters
@@ -60,14 +59,6 @@ public class Libro {
 	public void setISBN(String iSBN) {
 		isbn = iSBN;
 	}
-
-//	public String getEditorial() {
-//		return editorial;
-//	}
-//
-//	public void setEditorial(String editorial) {
-//		this.editorial = editorial;
-//	}
 
 	public String getTitulo() {
 		return titulo;
@@ -103,8 +94,8 @@ public class Libro {
 		return copias;
 	}
 
-	public void addCopia(boolean estado, String editorial) {
-		copias.add(new Copia(estado, editorial));
+	public void addCopia(String editorial, int anio_publicacion) {
+		copias.add(new Copia(editorial, anio_publicacion));
 	}
 
 	public void removeCopia(Copia c) {
@@ -129,7 +120,7 @@ public class Libro {
 			}
 			sAutores += it.next().getNombre();
 		}
-		return String.format("\"%s\" [ed. %s ISBN %s public. %s] %s (%s copias)", titulo,/* editorial,*/ isbn,
+		return String.format("\"%s\" [ed. %s ISBN %s public. %s] (%s copias)", titulo, isbn,
 				anio_escritura, sAutores, copias.size());
 	}
 
